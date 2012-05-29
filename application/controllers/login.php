@@ -29,15 +29,15 @@ class Login extends CI_Controller {
 			{
 				redirect('site/admin_area');
 			}
-			//als je een leraar bent
+			//als je een ouder bent
 			else if($accountType == 2)
 			{
-				redirect('site/teacher_area');
+				redirect('site/parent_area');
 			}
-			//als je een ouder bent
+			//als je een leraar bent
 			else if($accountType == 3)
 			{
-				redirect('site/crud_read');
+				redirect('site/teacher_area');
 			}
 			//als je een leerling bent
 			else if($accountType == 4)
