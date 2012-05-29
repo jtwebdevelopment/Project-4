@@ -44,7 +44,7 @@ class Site extends CI_Controller
 		$this->load->view('options_view', $data);
 	}
 	
-	function crud_create()
+	function crud_create_user()
 	{
 		$data = array(
 			'voornaam' => $this->input->post('firstname'),
@@ -55,10 +55,10 @@ class Site extends CI_Controller
 		);
 		
 		$this->site_model->add_record($data);
-		$this->crud_read();
+		$this->crud_read_user();
 	}
 	
-	function crud_update()
+	function crud_update_user()
 	{
 		if(!$this->uri->segment(4) == 'update'){
 			$data = array(
@@ -71,14 +71,14 @@ class Site extends CI_Controller
 		
 			$this->site_model->update_record($data);
 		}
-		$this->crud_read();
+		$this->crud_read_user();
 	}
 	
 	
-	function crud_delete()
+	function crud_delete_user()
 	{
 		$this->site_model->delete_row();
-		$this->crud_read();
+		$this->crud_read_user();
 	}
 	
 	function is_logged_in()

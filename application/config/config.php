@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/prikbord/';
+$config['base_url']	= 'http://localhost/gitProject4/';
 
 /*
 |--------------------------------------------------------------------------
