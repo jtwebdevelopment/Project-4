@@ -4,7 +4,8 @@ class Site_model extends CI_Model {
 	
 	function get_user()
 	{
-		$query = $this->db->get('gebruiker');
+		//haal alle gebruikers op en sorteer ze op hun accountType (admin, ouder, docent of leerling)
+		$query = $this->db->query('SELECT * FROM `gebruiker` order by idAccountType Asc');
 		return $query->result();
 	}
 	

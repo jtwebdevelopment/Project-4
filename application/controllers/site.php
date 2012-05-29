@@ -10,7 +10,15 @@ class Site extends CI_Controller
 
 	function admin_area()
 	{
-		$this->load->view('admin_area');
+		
+		$data = array();
+		
+		if($query = $this->site_model->get_user())
+		{
+			$data['records'] = $query;
+		}
+		
+		$this->load->view('admin_area', $data);
 	}
 	
 	function student_area()
@@ -35,7 +43,8 @@ class Site extends CI_Controller
 		$this->load->view('parent_area', $data);
 	}
 	
-	function crud_read(){
+	function crud_read()
+	{
 		$data = array();
 		
 		if($query = $this->site_model->get_user())
@@ -43,7 +52,7 @@ class Site extends CI_Controller
 			$data['records'] = $query;
 		}
 		
-		$this->load->view('options_view', $data);
+		$this->load->view('admin_area', $data);
 	}
 	
 	function crud_create()
