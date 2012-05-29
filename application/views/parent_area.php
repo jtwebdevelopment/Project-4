@@ -9,10 +9,12 @@ parent area
 		//voor iedere notitie
 		 foreach($records as $row)
 		 {
-			//echo de titel van de notitie
-			 echo $row->titel;
-			 //echo de beschrijving van de notitie
-			 echo $row->beschrijving;
+?>
+			<div class="notitie">
+				<h3><?php echo $row->titel; ?></h3> 
+				<p><?php echo $row->beschrijving; ?></p>
+			</div>
+<?php
 		 }
 	}
 	//als er geen notities zijn gevonden

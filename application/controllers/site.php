@@ -8,11 +8,6 @@ class Site extends CI_Controller
 		$this->is_logged_in();
 	}
 
-	function members_area()
-	{
-		$this->load->view('members_area');
-	}
-	
 	function admin_area()
 	{
 		$this->load->view('admin_area');
@@ -30,13 +25,20 @@ class Site extends CI_Controller
 	
 	function parent_area()
 	{
-		$this->load->view('parent_area');
+		$data = array();
+		
+		if($query = $this->site_model->get_records())
+		{
+			$data['records'] = $query;
+		}
+	
+		$this->load->view('parent_area', $data);
 	}
 	
 	function crud_read(){
 		$data = array();
 		
-		if($query = $this->site_model->get_records())
+		if($query = $this->site_model->get_user())
 		{
 			$data['records'] = $query;
 		}
@@ -54,7 +56,7 @@ class Site extends CI_Controller
 			'idAccountType' => $this->input->post('accountType')
 		);
 		
-		$this->site_model->add_record($data);
+		$this->site_model->add_user($data);
 		$this->crud_read();
 	}
 	
@@ -69,7 +71,7 @@ class Site extends CI_Controller
 				'idAccountType' => $this->input->post('accountType')
 			);
 		
-			$this->site_model->update_record($data);
+			$this->site_model->update_user($data);
 		}
 		$this->crud_read();
 	}
@@ -77,7 +79,7 @@ class Site extends CI_Controller
 	
 	function crud_delete()
 	{
-		$this->site_model->delete_row();
+		$this->site_model->delete_user();
 		$this->crud_read();
 	}
 	
