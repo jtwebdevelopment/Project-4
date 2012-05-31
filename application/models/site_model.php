@@ -30,31 +30,39 @@ class Site_model extends CI_Model {
 	}
 			
 //crud acties voor de opdrachtentabel//////////////////////////////////////////
-	
-	/*function get_notes()
+	function get_associated_notes()
 	{
-		//haal alle notities op en sorteer ze op hun opdrachtid (laag naar hoog)
-		$query = $this->db->query('SELECT * FROM `notitie` order by idOpdracht Asc');
+		//haal alle opdrachten op en sorteer ze op hun opdrachtid (laag naar hoog)
+		//$query = $this->db->query('SELECT * FROM `notities` WHERE id= order by idOpdracht Asc');              //aanpassen nar ui
+		$query = $this->db->get_where('notitie', array('idOpdracht' => $this->uri->segment(3)));
 		return $query->result();
 	}
 	
-	function add_note($data) 
+	
+	function get_assignments()
 	{
-		$this->db->insert('notitie', $data);
+		//haal alle opdrachten op en sorteer ze op hun opdrachtid (laag naar hoog)
+		$query = $this->db->query('SELECT * FROM `opdracht` order by idOpdracht Asc');
+		return $query->result();
+	}
+	
+	function add_assignment($data) 
+	{
+		$this->db->insert('opdracht', $data);
 		return;
 	}
 	
-	function update_note($data) 
+	function update_assignment($data) 
 	{
-		$this->db->where('idNotitie', $this->uri->segment(3));
-		$this->db->update('notitie', $data);
+		$this->db->where('idOpdracht', $this->uri->segment(3));
+		$this->db->update('opdracht', $data);
 	}
 	
-	function delete_note()
+	function delete_assignment()    
 	{
-		$this->db->where('idNotitie', $this->uri->segment(3));
-		$this->db->delete('notitie');
-	}*/
+		$this->db->where('idOpdracht', $this->uri->segment(3));
+		$this->db->delete('opdracht');
+	}
 		
 //crud acties voor de notitietabel//////////////////////////////////////////
 	

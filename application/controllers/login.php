@@ -21,11 +21,11 @@ class Login extends CI_Controller {
 			);
 			$this->session->set_userdata($data);
 			
-			//check bij welke usergroup je hoort en verwijst je op basis daar van door naar je eigen startpage
+			//check bij welke usergroup je hoort 
 			$accountType = $this->session->userdata('idAccountType');
 			
 			//als je een admin bent
-			if($accountType == 1)
+			/*if($accountType == 1)
 			{
 				redirect('site/admin_area');
 			}
@@ -43,7 +43,8 @@ class Login extends CI_Controller {
 			else if($accountType == 4)
 			{
 				redirect('site/student_area');
-			}
+			}*/
+			redirect('site/home');
 		}
 		else // incorrect username or password
 		{

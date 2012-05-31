@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/gitProject4/';
+$config['base_url']	= 'http://localhost/project4Final/';
 
 /*
 |--------------------------------------------------------------------------
