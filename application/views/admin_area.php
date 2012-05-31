@@ -1,4 +1,4 @@
-admin area
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,12 +10,20 @@ admin area
 	</style>
 </head>
 <body>
+<?php
+	////////////////////////////////////////////////alleen nodig als we alles op 1 pagina gaan doen //////////////////////////////////////////////////
+
+	//als je admin bent
+	/*if($idAccountType == 2)
+	{*/
+?>
+
 	<?php if($this->uri->segment(4) == 'update'): ?>
 		 <h2>Update</h2>
-		 <?php echo form_open('site/crud_update/' . $this->uri->segment(3));?>
+		 <?php echo form_open('site/update_user/' . $this->uri->segment(3));?>
 	<?php else: ?>
 		<h2>Nieuwe gebruiker</h2>
-		<?php echo form_open('site/crud_create');?>
+		<?php echo form_open('site/create_user');?>
 	<?php endif; ?>
 	
 	<p>
@@ -44,58 +52,129 @@ admin area
 	</p>
 	
 	<p>
-		<input type="submit" value="Submit" />
+		<input type="submit" value="Maak de nieuwe gebruiker aan!" />
 	</p>
 	<?php echo form_close(); ?>
 
 	<hr />
-	
+
 	<h3>Alle bestaande gebruikers</h3>
 	<p>
 		De gebruikers worden gesorteerd op accounttype. 
-		De adminisrators staan bovenaan, gevolgd door de Ouders, Docenten en Leerlingen.
+		De administrators staan bovenaan, gevolgd door de Ouders, Docenten en Leerlingen.
+		Achter de gebruiker kun je op "Update" of op "Verwijder" klikken om de gebruiker aan te passen of te verwijderen!
 	</p>
 	
 	<h4>Accounttype Username Voornaam Achternaam</h4>
 	<?php 		
 	
-		if(isset($records))
+		if(isset($users))
 		{
-			foreach($records as $row)
+			foreach($users as $user)
 			{
 
-				if($row->idAccountType == 1)
+				if($user->idAccountType == 1)
 				{
 					$accountType = "Administrator";
 				}
-				else if($row->idAccountType == 2)
+				else if($user->idAccountType == 2)
 				{
 					$accountType = "Ouder";
 				}
-				else if($row->idAccountType == 3)
+				else if($user->idAccountType == 3)
 				{
 					$accountType = "Docent";
 				}
-				else if($row->idAccountType == 4)
+				else if($user->idAccountType == 4)
 				{
 					$accountType = "Leerling";
 				}
 ?>				
 				<div class="userInfo">
-					<?php echo '<b>' .$accountType.'</b>' ." " .$row->username ." " .$row->voornaam ." " .$row->achternaam; ?>				
-					<?php echo anchor("site/crud_update/$row->idGebruiker/update", 'update'); ?>
-					<?php echo anchor("site/crud_delete/$row->idGebruiker", 'delete'); ?>
+					<?php echo '<b>' .$accountType.'</b>' ." " .$user->username ." " .$user->voornaam ." " .$user->achternaam; ?>				
+					<?php echo anchor("site/update_user/$user->idGebruiker/update", 'aanpassen'); ?>
+					<?php echo anchor("site/delete_user/$user->idGebruiker", 'verwijderen'); ?>
 				</div>
 				<hr />
 
-		<?php
+<?php
 			}
+			
 		} 
 		else
 		{
-			echo "No users were found!";
+			echo "Er zijn geen gebruikers gevonden!";
 		}
-	?>
+		
+		///////////////////////////////////////////////alleen nodig als we alles in 1 pagina gaan doen////////////////////////////////			
+		
+	/*}
+	else
+	{
+		echo "you are not an admin, so u cant view the actions available to admins";
+	}*/
+	
+		
+		/////////////////crud acties voor notities//////////////////////////////////////////////////////////////////////////////////////////
+?>
+			<?php if($this->uri->segment(4) == 'update'): ?>
+		 <h2>Update</h2>
+		 <?php echo form_open('site/update_note/' . $this->uri->segment(3));?>
+	<?php else: ?>
+		<h2>Nieuwe notitie</h2>
+		<?php echo form_open('site/create_note');?>
+	<?php endif; ?>
+	
+	<p>
+		<label for="idOpdracht">Hoort bij opdracht:</label>
+		<input type="text" name="idOpdracht" id="idOpdracht" />
+	</p>
+	
+	<p>
+		<label for="titel">Titel:</label>
+		<input type="text" name="titel" id="titel" />
+	</p>	
+	
+	<p>
+		<label for="beschrijving">Beschrijving:</label>
+		<input type="text" name="beschrijving" id="beschrijving" />
+	</p>	
+
+	<p>
+		<input type="submit" value="Voeg de notitie toe!" />
+	</p>
+	<?php echo form_close(); ?>
+
+	<hr />
+
+	<h3>Alle bestaande notities</h3>
+	
+	<h4>Opdracht, Titel, Beschrijving</h4>
+	<?php 		
+	
+		if(isset($notes))
+		{
+			foreach($notes as $note)
+			{
+				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
+?>				
+				<div class="note">
+					<?php echo '<b>' .$note->idOpdracht.'</b>' ." " .$note->titel ." " .$note->beschrijving ." " ?>				
+					<?php echo anchor("site/update_note/$note->idNotitie/update", 'aanpassen'); ?>
+					<?php echo anchor("site/delete_note/$note->idNotitie", 'verwijderen'); ?>
+				</div>
+				<hr />
+
+<?php
+			}
+			
+		} 
+		else
+		{
+			echo "Er zijn geen notities gevonden!";
+		}
+		
+?>
 	
 	<div>
 	

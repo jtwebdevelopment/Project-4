@@ -32,7 +32,7 @@ class Login extends CI_Controller {
 			//als je een ouder bent
 			else if($accountType == 2)
 			{
-				redirect('site/parent_area');
+				redirect('site/admin_area');
 			}
 			//als je een leraar bent
 			else if($accountType == 3)
@@ -68,9 +68,7 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('username','Username','trim|required|min_length[4]|callback_username_chk');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		$this->form_validation->set_rules('password2', 'Password Confirmation', 'trim|required|matches[password]');
-		
-		
-		
+
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('signup_form');
