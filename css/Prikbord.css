@@ -23,6 +23,10 @@
 	display:block;
 	float:left;
 	}
+	
+.noMenuPusherDiv{
+	margin-top:175px;
+}
 /* ################### create notitie form en div ############################# */
 
 #createopdracht{
@@ -173,7 +177,6 @@ body {
 
 .notitie>p{
 	margin-top:10px;
-	background-color:red;
 	width:inherit;
 	float:left;
 }
@@ -182,6 +185,7 @@ body {
 	margin-top:15px;
 	text-align:center;
 	width:inherit;
+	font-size:x-large;
 	float:left;
 }
 
