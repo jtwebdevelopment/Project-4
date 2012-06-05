@@ -2,7 +2,6 @@
 
 class Site_model extends CI_Model {
 	
-
 //crud acties voor de usertabel//////////////////////////////////////////	
 	function get_users()
 	{
@@ -32,12 +31,10 @@ class Site_model extends CI_Model {
 //crud acties voor de opdrachtentabel//////////////////////////////////////////
 	function get_associated_notes()
 	{
-		//haal alle opdrachten op en sorteer ze op hun opdrachtid (laag naar hoog)
-		//$query = $this->db->query('SELECT * FROM `notities` WHERE id= order by idOpdracht Asc');              //aanpassen nar ui
+		//haalt alle notities die bij deze opdracht behoren op
 		$query = $this->db->get_where('notitie', array('idOpdracht' => $this->uri->segment(3)));
 		return $query->result();
 	}
-	
 	
 	function get_assignments()
 	{
@@ -65,6 +62,13 @@ class Site_model extends CI_Model {
 	}
 		
 //crud acties voor de notitietabel//////////////////////////////////////////
+	
+	function get_all_data_from_this_note()
+	{
+		//haal alle notities op en sorteer ze op hun opdrachtid (laag naar hoog)
+		$query = $this->db->get_where('notitie', array('idNotitie' => $this->uri->segment(3)));
+		return $query->result();
+	}
 	
 	function get_notes()
 	{

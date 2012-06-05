@@ -15,7 +15,7 @@ Dit zijn alle notities die bij deze opdracht horen:
 
 <?php
 			}
-
+		}
 	//voor het ophalen van elke notitie die bij deze opdracht hoort
 	
 		if(isset($associatedNotes))
@@ -37,5 +37,16 @@ Dit zijn alle notities die bij deze opdracht horen:
 		{
 			echo "Er zijn geen notities gevonden!";
 		}
+		
+	//alleen als je bij deze usergroups hoort krijg je deze link te zien
+	//admin
+	//docent
+	//leerling
+	if($accountType == 1 || $accountType == 3 || $accountType == 4)
+	{
+		//link naar de crud acties voor notities
+		echo anchor("site/crud_notities/" . $this->uri->segment(3) , 'Notities beheren') .'<br />'; 
+	}
+		
 		
 ?>

@@ -22,7 +22,7 @@ h1,h2,h3,h4,h5 {
 	text-align: center;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password],select {
 	display: inline;
 	margin: 0 0 1em 0;
 	width: 180px;

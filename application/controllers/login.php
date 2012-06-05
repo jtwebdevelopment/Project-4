@@ -92,13 +92,6 @@ class Login extends CI_Controller {
 		
 	}
 	
-	function logout()
-	{
-		$this->session->sess_destroy();
-		$this->index();
-	}
-	
-
 
 	function username_chk($username)
 	{

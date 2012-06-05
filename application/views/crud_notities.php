@@ -3,7 +3,7 @@
 		 <?php echo form_open('site/update_note/' . $this->uri->segment(3));?>
 	<?php else: ?>
 		<h2>Nieuwe notitie</h2>
-		<?php echo form_open('site/create_note');?>
+		<?php echo form_open('site/create_note/' . $this->uri->segment(3));?>
 	<?php endif; ?>
 	
 	<p>

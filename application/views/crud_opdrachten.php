@@ -44,7 +44,7 @@
 				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
 ?>				
 				<div class="assignment">
-					<?php echo '<b>' .$assignment->idOpdracht.'</b>' ." " .$assignment->titel ." " .$assignment->beschrijving ." " ?>				
+					<?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?>				
 					<?php echo anchor("site/update_assignment/$assignment->idOpdracht/update", 'aanpassen'); ?>
 					<?php echo anchor("site/delete_assignment/$assignment->idOpdracht", 'verwijderen'); ?>
 				</div>
@@ -58,5 +58,6 @@
 		{
 			echo "Er zijn geen opdrachten gevonden!";
 		}
+		
 		
 ?>
