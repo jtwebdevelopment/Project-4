@@ -25,7 +25,7 @@
 	}
 /* ################### create notitie form en div ############################# */
 
-#createnotitie{
+#createopdracht{
 	position: absolute;
     top: 60px;
     left: 35%;
@@ -37,11 +37,11 @@
 	background: url(../img/login_bg.jpg);
 	}
 
-#createnotitie input[type=text]{
+#createnopdracht input[type=text]{
 		display: block;
 	}
 
-#createnotitie select{
+#createopdracht select{
 		display: block;
 	}
 

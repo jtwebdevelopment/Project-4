@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="#" />  
@@ -20,35 +20,34 @@
     <h1>Groep 2B</h1>
     
     <div id="menu">
-        <ul>
-            <li><a id="maaknotitiebtn">Nieuwe notitie</a></li>
-        </ul>
+		<a id="maakopdrachtbtn">Nieuwe opdracht</a>
     </div> <!-- end menu -->
-    <div id="createnotitie" class="invisible">
+	
+    <div id="createopdracht" class="invisible">
 		
-	<?php $name = array('name' => 'createnotitieform'); ?>	
-	<?php echo form_open('site/create_note/' . $this->uri->segment(3), $name);?>
+	<?php $name = array('name' => 'createopdrachtform'); ?>	
+	<?php echo form_open('site/create_assignment/' . $this->uri->segment(3), $name);?>
 
-		<label for="idOpdracht">Opdracht:</label><br><br>
+		 <!-- <label for="idOpdracht">Opdracht:</label><br><br>
 		<select name='idOpdracht[]' id='idOpdracht'>
 			<?php
-				if(isset($assignments))
+				/*if(isset($assignments))
 				{
 					foreach($assignments as $assignment)
 					{
 						echo "<option value='" .  $assignment->idOpdracht . "'>" .  $assignment->titel . "</option>";
 					}
-				}
+				}*/
 			?>
-		</select><br>
+		</select><br /> -->
 		
-		<label for="titel">Notitie titel:</label><br>
+		<label for="titel">Opdracht titel:</label><br>
 		<input type="text" name="titel" id="titel" /><br>
 		<label for="beschrijving">Beschrijving:</label><br>
 		<input type="text" name="beschrijving" id="beschrijving" /><br>
 			
-		<input type="submit" value="Maak notitie" />
-		<a id="maaknotitiebtn" class="afsluitknop">Niet nu!</a>
+		<input type="submit" value="Maak opdracht" />
+		<a id="maakopdrachtbtn" class="afsluitknop">Niet nu!</a>
 	<?php echo form_close(); ?>
 
     </div>
@@ -87,7 +86,6 @@
     
     <div id="prikbordcontainer" class="split">
     	<div id="prikbord">
-			<h2>Dit zijn alle opdrachten! Klik op een opdracht om het bijbehorende werk te kunnen zien!</h2>
            <?php
 				//voor het ophalen van elke notitie die bij deze opdracht hoort
 				/*if(isset($associatedNotes) && $is_logged_in)
@@ -120,7 +118,9 @@
 					{
 ?>
 						<div class="notitie">
-							<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>					
+							<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>
+							<?php echo anchor("site/update_assignment/$assignment->idOpdracht", 'update');?>
+							<?php echo anchor("site/delete_assignment/$assignment->idOpdracht", 'delete');?>							
 						</div>						
 <?php
 					}

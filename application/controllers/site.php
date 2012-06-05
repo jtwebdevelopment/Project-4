@@ -206,6 +206,9 @@ function read_assignment()
 		
 		$this->site_model->add_assignment($data);
 		$this->read_assignment();
+		
+		//redirect terug naar home
+		redirect('site/home');
 	}
 	
 	function update_assignment()
@@ -225,12 +228,15 @@ function read_assignment()
 	}
 	
 	
-	function delete_assignment()                      //deze werkt nog niet als er notities zijn die bij deze opdracht horen////////////////////////////
+	function delete_assignment()                     
 	{
 		$this->is_logged_in();
 		
 		$this->site_model->delete_assignment();
 		$this->read_assignment();
+		
+		//redirect terug naar home
+		redirect('site/home');
 	}
 	
 //crud acties voor de notitiestabel//////////////////////////////////////////
@@ -254,7 +260,7 @@ function read_assignment()
 		$this->is_logged_in();
 		$idOpdracht = $this->input->post("idOpdracht");
 		$data = array(
-			'idOpdracht' => $idOpdracht[0],
+			'idOpdracht' => $this->uri->segment(3),
 			'Titel' => $this->input->post('titel'),
 			'Beschrijving' => $this->input->post('beschrijving')
 		);
@@ -262,7 +268,7 @@ function read_assignment()
 		$this->site_model->add_note($data);
 		
 		//redirect je terug naar de homepage
-		redirect('site/home');
+		//redirect('site/get_associated_notes/'.$this->uri->segment(4));
 	}
 	
 	function update_note()
