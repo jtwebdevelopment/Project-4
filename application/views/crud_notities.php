@@ -7,8 +7,22 @@
 	<?php endif; ?>
 	
 	<p>
-		<label for="idOpdracht">Hoort bij opdracht:</label>
-		<input type="text" name="idOpdracht" id="idOpdracht" />
+		<label for="idOpdracht">Opdracht:</label><br />
+		<select name='idOpdracht[]' id='idOpdracht'>
+			<?php
+				if(isset($assignments))
+				{
+					foreach($assignments as $assignment)
+					{
+						echo "<option value='" .  $assignment->idOpdracht . "'>" .  $assignment->titel . "</option>";
+					}
+				}
+				else
+				{
+					echo "<option>Voeg eerst een opdracht toe!</option>";
+				}
+			?>
+		</select>
 	</p>
 	
 	<p>

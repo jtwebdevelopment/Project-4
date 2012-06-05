@@ -4,7 +4,7 @@
 		 <h2>Update de opdracht</h2>
 		 <?php echo form_open('site/update_assignment/' . $this->uri->segment(3));?>
 	<?php else: ?>
-		<h2>Nieuwe opdracht</h2>
+		<h2>Nieuwe opdracht toevoegen</h2>
 		<?php echo form_open('site/create_assignment');?>
 	<?php endif; ?>
 	
@@ -24,20 +24,31 @@
 		<input type="text" name="deadline" id="deadline" />
 	</p>
 	
+	<?php 
+	//kijk wat er op de button moet komen te staan
+	if($this->uri->segment(4) == 'update')
+	{
+		$message = "Update de opdracht!";
+	}
+	else
+	{ 
+		$message = "Voeg de opdracht toe!";
+	}
+	?>
 
 	<p>
-		<input type="submit" value="Voeg de opdracht toe!" />
+		<input type="submit" value="<?php echo $message; ?>" />
 	</p>
 	<?php echo form_close(); ?>
 
 	<hr />
 
-	<h3>Alle bestaande opdrachten</h3>
+<!--	<h3>Alle bestaande opdrachten</h3>
 	
-	<h4>Opdracht, Titel, Beschrijving</h4>
+	<h4>Opdracht, Titel, Beschrijving</h4> -->
 	<?php 		
 	
-		if(isset($assignments))
+		/*if(isset($assignments))
 		{
 			foreach($assignments as $assignment)
 			{
@@ -58,6 +69,6 @@
 		{
 			echo "Er zijn geen opdrachten gevonden!";
 		}
-		
+		*/
 		
 ?>

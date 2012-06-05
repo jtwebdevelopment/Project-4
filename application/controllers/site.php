@@ -21,14 +21,18 @@ class Site extends CI_Controller
 	{
 		//om alle opdrachten op te halen
 		$data = array();
-		
+				
 		$associatedNotesQuery = $this->site_model->get_associated_notes();
+		
+		$usersQuery = $this->site_model->get_users();
 		
 		if($assignmentsQuery = $this->site_model->get_assignments())
 		{
 			$data['assignments'] = $assignmentsQuery;
 			$data['associatedNotes'] = $associatedNotesQuery;
 			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+			
+			$data['idAccountType'] = $this->session->userdata('idAccountType');
 		}
 		
 		$this->load->view('home', $data);
@@ -67,10 +71,15 @@ class Site extends CI_Controller
 		$this->is_logged_in();
 		$data = array();
 		
+		
 		//ophalen van alle notities info
 		if($notesQuery = $this->site_model->get_notes())
 		{
+			//haalt alle opdrachten op
+			$assignmentsQuery = $this->site_model->get_assignments();
+			
 			$data['notes'] = $notesQuery;
+			$data['assignments'] = $assignmentsQuery;
 		}
 		
 		$this->load->view('crud_notities', $data);
@@ -141,8 +150,6 @@ class Site extends CI_Controller
 		}
 		$this->read_user();
 		
-		//redirect terug naar crud gebruikers
-		//redirect('site/crud_gebruikers');                                                     //waarom doet dit het niet??????????
 	}
 	
 	
@@ -168,13 +175,16 @@ function get_associated_notes()
 		$associatedNotesQuery = $this->site_model->get_associated_notes();
 		$assignmentNameQuery = $this->site_model->get_assignment();
 		
+		$usersQuery = $this->site_model->get_users();
+		
 		if($this->site_model->get_associated_notes())
 		{
 			$data['associatedNotes'] = $associatedNotesQuery;
 			$data['assignmentName'] = $assignmentNameQuery;
+			
+			$data['idAccountType'] = $this->session->userdata('idAccountType');
 		}
 	
-		$data['accountType'] = $this->session->userdata('idAccountType');
 		$this->load->view('single_assignment', $data);
 	}	
 
@@ -267,8 +277,6 @@ function read_assignment()
 		
 		$this->site_model->add_note($data);
 		
-		//redirect je terug naar de homepage
-		//redirect('site/get_associated_notes/'.$this->uri->segment(4));
 	}
 	
 	function update_note()
@@ -283,9 +291,7 @@ function read_assignment()
 			$this->site_model->update_note($data);
 		}
 		$this->read_note();
-		
-		//redirect je terug naar de homepage
-		//redirect('site/home');                                           //waarom werkt dit niet???????????
+                                  
 	}
 	
 	

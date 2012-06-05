@@ -23,32 +23,13 @@ class Login extends CI_Controller {
 			
 			//check bij welke usergroup je hoort 
 			$accountType = $this->session->userdata('idAccountType');
-			
-			//als je een admin bent
-			/*if($accountType == 1)
-			{
-				redirect('site/admin_area');
-			}
-			//als je een ouder bent
-			else if($accountType == 2)
-			{
-				redirect('site/admin_area');
-			}
-			//als je een leraar bent
-			else if($accountType == 3)
-			{
-				redirect('site/teacher_area');
-			}
-			//als je een leerling bent
-			else if($accountType == 4)
-			{
-				redirect('site/student_area');
-			}*/
+	
 			redirect('site/home');
 		}
 		else // incorrect username or password
 		{
-			$this->index();
+			//stuur de gebruiker terug naar de home page
+			redirect('site/home');			
 		}
 	}	
 	

@@ -17,10 +17,55 @@
 
 <body>
 <div id="wrapper">
-    <h1>Groep 2B</h1>
+	
+<?php
+	//als er een accounttype is gevonden
+	if(isset($idAccountType))
+	{
+		if($idAccountType == 1)
+		{
+		  $accountType = "administrator";
+		}
+		elseif($idAccountType == 2)
+		{
+			$accountType = "ouder";
+		}	
+		elseif($idAccountType == 3)
+		{
+			$accountType = "docenten";
+		}
+		elseif($idAccountType == 4)
+		{
+			$accountType = "leerling";
+		}
+		
+		//kijkt wat voor accountType je hebt en laat zien met wat voor account je bent ingelogd
+		if($idAccountType == 1 || $idAccountType == 2 || $idAccountType == 3 || $idAccountType == 4)
+		{
+			echo "U Bent ingelogd met een " .$accountType ." account.";
+		}
+		//als je geen accountType hebt laat hij zien dat je nog niet bent ingelogd
+		else
+		{
+			echo "U bent nog niet ingelogd!";
+		}
+ 	
+	}
+
+	 
+?>
     
+	<h1>Groep 2B</h1>
     <div id="menu">
-		<a id="maakopdrachtbtn">Nieuwe opdracht</a>
+<?php	//als je bij de admins, leerlingen of docenten hoort krijg je de volgende links te zien
+		if($idAccountType == 1 || $idAccountType == 3 || $idAccountType == 4)
+		{
+?>
+			<a id="maakopdrachtbtn">Nieuwe opdracht</a>
+<?php
+		}
+?>
+
     </div> <!-- end menu -->
 	
     <div id="createopdracht" class="invisible">
@@ -28,18 +73,6 @@
 	<?php $name = array('name' => 'createopdrachtform'); ?>	
 	<?php echo form_open('site/create_assignment/' . $this->uri->segment(3), $name);?>
 
-		 <!-- <label for="idOpdracht">Opdracht:</label><br><br>
-		<select name='idOpdracht[]' id='idOpdracht'>
-			<?php
-				/*if(isset($assignments))
-				{
-					foreach($assignments as $assignment)
-					{
-						echo "<option value='" .  $assignment->idOpdracht . "'>" .  $assignment->titel . "</option>";
-					}
-				}*/
-			?>
-		</select><br /> -->
 		
 		<label for="titel">Opdracht titel:</label><br>
 		<input type="text" name="titel" id="titel" /><br>
@@ -87,40 +120,29 @@
     <div id="prikbordcontainer" class="split">
     	<div id="prikbord">
            <?php
-				//voor het ophalen van elke notitie die bij deze opdracht hoort
-				/*if(isset($associatedNotes) && $is_logged_in)
-				{
-					foreach($associatedNotes as $associatedNote)
-					{
-?>						
-						<div class="notitie">
-						
-							<h3><?php echo $associatedNote->titel?>	</h3>
-							
-							<p class="links">
-								<?php echo anchor("site/update_note/$associatedNote->idNotitie/update", 'aanpassen'); ?>
-								<?php echo anchor("site/delete_note/$associatedNote->idNotitie", 'verwijderen'); ?>
-							</p>
-						</div>
-<?php
-					}
-				} 
-				else
-				{
-					if($is_logged_in){
-						echo "Er zijn geen notities gevonden!";
-					}
-				}*/
-				
-					if(isset($assignments))
+		   //als er opdrachten zijn
+				if(isset($assignments))
 				{
 					foreach($assignments as $assignment)
 					{
 ?>
 						<div class="notitie">
 							<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>
-							<?php echo anchor("site/update_assignment/$assignment->idOpdracht", 'update');?>
-							<?php echo anchor("site/delete_assignment/$assignment->idOpdracht", 'delete');?>							
+							<?php
+								//als je bij de admins of docenten hoort krijg je de volgende links te zien
+								if($idAccountType == 1 || $idAccountType == 3)
+								{
+									//kan je updaten
+									echo anchor("site/update_assignment/$assignment->idOpdracht/update", 'update');
+									
+									echo '<br />';
+									
+									//kan je verwijderen
+									echo anchor("site/delete_assignment/$assignment->idOpdracht", 'delete');
+								}
+		
+							?>
+														
 						</div>						
 <?php
 					}

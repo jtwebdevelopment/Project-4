@@ -18,6 +18,25 @@
 <body>
 	<div id="wrapper">
 	
+	<?php 	
+		//om de titel en beschrijdving en deadline van de opdracht te kunnen laten zien			
+		if(isset($assignmentName))
+		{
+		
+			foreach($assignmentName as $name)
+			{
+?>				
+
+					<h2><?php echo $name->titel; ?></h2>
+					<br />
+					<h3>Beschrijving:</h3>
+					<p><?php echo $name->beschrijving; /*//////////////////////////////dit is niet goed///////////////////////////////*/?></p>
+					<h3>Deadline: <?php echo $name->deadline; ?></h3>
+<?php
+			}
+		}
+?>
+	
 	<div id="menu">
 		<a id="maaknotitiebtn">Nieuwe notitie</a>
     </div> <!-- end menu -->
@@ -57,21 +76,6 @@
 
     </div>
 		
-<?php 	
-		//om de titel en beschrijdving en deadline van de opdracht te kunnen laten zien			
-		if(isset($assignmentName))
-		{
-			foreach($assignmentName as $name)
-			{
-				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
-?>				
-
-					<h1><?php echo $name->titel; ?></h1>
-
-<?php
-			}
-		}
-?>
 		<div id="prikbordcontainer" class="split">
 			<div id="prikbord">
 
@@ -82,12 +86,25 @@
 		{
 			foreach($associatedNotes as $associatedNote)
 			{
-				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
-?>				
+				
+?>
 				<div class="notitie">
 					<?php echo anchor("site/get_all_data_from_this_note/$associatedNote->idNotitie", $associatedNote->titel);?>
-					<?php echo anchor("site/update_note/$associatedNote->idNotitie/update", 'aanpassen'); ?>
-					<?php echo anchor("site/delete_note/$associatedNote->idNotitie", 'verwijderen'); ?>
+	
+
+<?php				//als je bij de admins of docenten hoort krijg je de volgende links te zien
+					if($idAccountType == 1 || $idAccountType == 3)
+					{
+						//kan je updaten
+						echo anchor("site/update_note/$associatedNote->idNotitie/update", 'aanpassen');
+						
+						echo '<br />';
+						
+						//kan je verwijderen
+						echo anchor("site/delete_note/$associatedNote->idNotitie", 'verwijderen');
+					}
+
+?>				
 				</div>
 
 <?php
