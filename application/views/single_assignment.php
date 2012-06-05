@@ -2,16 +2,15 @@ Dit zijn alle notities die bij deze opdracht horen:
 
 <?php 	
 		//om de titel en beschrijdving en deadline van de opdracht te kunnen laten zien			
-		if(isset($assignments))
+		if(isset($assignmentName))
 		{
-			foreach($assignments as $assignment)
+			foreach($assignmentName as $name)
 			{
 				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
 ?>				
-				<div class="assignment">
-					<?php echo $assignment->titel ." " .$assignment->beschrijving ." " ?>				
+				<div class="notitie">
+					<?php echo $name->titel; ?>				
 				</div>
-				<hr />
 
 <?php
 			}
@@ -24,10 +23,9 @@ Dit zijn alle notities die bij deze opdracht horen:
 			{
 				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
 ?>				
-				<div class="note">
-					<?php echo $associatedNote->titel ." " .$associatedNote->beschrijving ." " ?>				
+				<div class="notitie">
+					<?php echo anchor("site/get_all_data_from_this_note/$associatedNote->idNotitie", $associatedNote->titel);?>
 				</div>
-				<hr />
 
 <?php
 			}

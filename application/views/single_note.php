@@ -5,7 +5,7 @@
 		{
 			foreach($allData as $data)
 			{
-				//hier moet gekeken worden welk nummer van idOpdracht bij welke opdracht naam hoort////////////////////
+
 ?>				
 				<div class="notitie">	
 					<h3><?php echo $data->titel;?></h3>

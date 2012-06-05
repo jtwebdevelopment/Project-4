@@ -166,10 +166,12 @@ function get_associated_notes()
 		$data = array();
 		
 		$associatedNotesQuery = $this->site_model->get_associated_notes();
+		$assignmentNameQuery = $this->site_model->get_assignment();
 		
 		if($this->site_model->get_associated_notes())
 		{
 			$data['associatedNotes'] = $associatedNotesQuery;
+			$data['assignmentName'] = $assignmentNameQuery;
 		}
 	
 		$data['accountType'] = $this->session->userdata('idAccountType');

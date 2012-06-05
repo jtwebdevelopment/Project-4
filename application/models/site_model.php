@@ -36,6 +36,13 @@ class Site_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_assignment()
+	{
+		//haalt alle notities die bij deze opdracht behoren op
+		$query = $this->db->get_where('opdracht', array('idOpdracht' => $this->uri->segment(3)));
+		return $query->result();
+	}
+	
 	function get_assignments()
 	{
 		//haal alle opdrachten op en sorteer ze op hun opdrachtid (laag naar hoog)
