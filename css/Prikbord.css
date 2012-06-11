@@ -35,6 +35,7 @@
     left: 35%;
 	width:240px;
 	height: 220px;
+	z-index: 20;
 	padding:30px;
     margin-left: auto;
 	margin-right: auto;
@@ -75,12 +76,14 @@ label  {
 }
 /* ######################################################## */
 #loginpopoutbtn{
+	position: absolute;
+	left: 80%;
 	float:left;
 	color:#FF3399;
 	font-weight:bold;
 	cursor:pointer;
+	top: 22%;
 	display:block;
-	margin-left: 800px;
 	margin-bottom: 5px;
 	text-decoration: none;
 	background-color:white;
@@ -91,18 +94,34 @@ label  {
 	}
 	
 #logoutbtn{
+	position: absolute;
+	left: 80%;
 	float:left;
 	color:#FF3399;
 	font-weight:bold;
 	cursor:pointer;
 	display:block;
-	margin-left: 800px;
 	margin-bottom: 5px;
 	text-decoration: none;
 	background-color:white;
 	border-radius: 5px;
 	height: 20px;
 	width: 60px;
+	text-align: center;
+}
+
+.maakopdrachtbtn{
+	float:left;
+	color:#FF3399;
+	font-weight:bold;
+	cursor:pointer;
+	display:block;
+	margin-bottom: 5px;
+	text-decoration: none;
+	background-color:white;
+	border-radius: 5px;
+	height: 20px;
+	width: 120px;
 	text-align: center;
 }
 
@@ -140,11 +159,11 @@ label  {
 	
 /* ##################################################################### */	
 
-#prikbord container{
+.prikbord container{
 	background-image: url(../img/backgroundart.png);
 	}
 	
-#prikbord{
+.prikbord{
 	width:936px;
 	height:522px;
 	margin-right: -10px;
@@ -173,6 +192,7 @@ body {
 	margin-top: 25px;
 	margin-right: 28px;
 	z-index:-1;
+	opacity: 0.9;
 }
 
 .notitie>p{
@@ -294,4 +314,20 @@ p.login_customFont {
 	height:100%;
 	opacity:0.4;
 	background-color: black;
+}
+
+.noteTitle {
+	margin-top : 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.noteTitle a{
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
+
+.noteWrapper{
+	position: absolute;
 }

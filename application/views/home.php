@@ -5,14 +5,16 @@
 	    <meta name="keywords" content="#" /> 
 		<title>CBS de Sleutel's Prikbord</title>
 		<script type="text/javascript" src="<?php echo base_url(); ?>/javascript/jquery-1.7.1.min.js"></script>
-		
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/css/reset.css" />
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/css/itemEffect.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/css/reset.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/css/Prikbord.css" />
       	<script type="text/javascript" src="<?php echo base_url(); ?>/javascript/Prikbord.js"></script>
-	<script type="text/javascript" src='<?php echo base_url(); ?>/javascript/lightbox.js'></script>
-	
-		
-		
+		<script type="text/javascript" src='<?php echo base_url(); ?>/javascript/lightbox.js'></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>/javascript/jquery.lightbox-0.5.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/css/jquery.lightbox-0.5.css" media="screen" />
+		<?php echo $javascriptPhpCombo; ?>
 </head>
 
 <body>
@@ -42,12 +44,12 @@
 		//kijkt wat voor accountType je hebt en laat zien met wat voor account je bent ingelogd
 		if($idAccountType == 1 || $idAccountType == 2 || $idAccountType == 3 || $idAccountType == 4)
 		{
-			echo "U Bent ingelogd met een " .$accountType ." account.";
+			// echo "U Bent ingelogd met een " .$accountType ." account.";
 		}
 		//als je geen accountType hebt laat hij zien dat je nog niet bent ingelogd
 		else
 		{
-			echo "U bent nog niet ingelogd!";
+			// echo "U bent nog niet ingelogd!";
 		}
  	
 	}
@@ -55,13 +57,13 @@
 	 
 ?>
     
-	<h1>Groep 2B</h1>
+	<a href="<?php echo base_url(); ?>index.php/site/home"> <h1>Groep 2B</h1> </a>
     <div id="menu">
 <?php	//als je bij de admins, leerlingen of docenten hoort krijg je de volgende links te zien
 		if($idAccountType == 1 || $idAccountType == 3 || $idAccountType == 4)
 		{
 ?>
-			<a id="maakopdrachtbtn">Nieuwe opdracht</a>
+			<a  href="#" id="draggable"  class="maakopdrachtbtn">Nieuwe opdracht</a>
 <?php
 		}
 ?>
@@ -118,34 +120,44 @@
     </div> <!-- end logincontainer -->
     
     <div id="prikbordcontainer" class="split">
-    	<div id="prikbord">
-           <?php
-		   //als er opdrachten zijn
+    	<div class="prikbord" id="containment-wrapper">   
+		   <?php
+				//als er opdrachten zijn
 				if(isset($assignments))
 				{
+					?>
+					<ul id="sortable">
+					<?php
 					foreach($assignments as $assignment)
 					{
-?>
-						<div class="notitie">
-							<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>
-							<?php
-								//als je bij de admins of docenten hoort krijg je de volgende links te zien
-								if($idAccountType == 1 || $idAccountType == 3)
-								{
-									//kan je updaten
-									echo anchor("site/update_assignment/$assignment->idOpdracht/update", 'update');
+						?>
+							<div class="notitie">
+								<li id="draggable" class="noteTitle">
+									<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>
 									
-									echo '<br />';
-									
-									//kan je verwijderen
-									echo anchor("site/delete_assignment/$assignment->idOpdracht", 'delete');
-								}
-		
-							?>
-														
-						</div>						
-<?php
+									<?php
+										//als je bij de admins of docenten hoort krijg je de volgende links te zien
+										if($idAccountType == 1 || $idAccountType == 3)
+										{
+											//kan je updaten
+											echo anchor("site/update_assignment/$assignment->idOpdracht/update", 'update');
+											
+											echo '<br />';
+											
+											//kan je verwijderen
+											echo anchor("site/delete_assignment/$assignment->idOpdracht", 'delete');
+											?>
+											<!-- <a href="<?php echo base_url(); ?>img/password_label.jpg">
+												<img src="<?php echo base_url(); ?>img/password_label.jpg"  width="72" height="72" alt="" />
+											</a> --!>
+											<?php
+										}
+									?>
+								</li>
+							</div>
+					<?php
 					}
+					?></ul><?php
 				}
 			?>
         </div>	<!-- end prikbord -->

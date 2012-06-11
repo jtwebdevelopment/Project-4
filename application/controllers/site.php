@@ -12,8 +12,8 @@ class Site extends CI_Controller
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		if(!isset($is_logged_in) || $is_logged_in != true)
 		{
-			echo 'You don\'t have permission to access this page. <a href="http://localhost/project4Final/index.php/site/home">Login</a>';	
-			die();		
+			echo 'U moet ingelogt zijn om deze pagina te zien, <a href="' . base_url() . 'index.php/site/home"> login </a>';	
+			die();
 		}	
 	}	
 
@@ -31,7 +31,7 @@ class Site extends CI_Controller
 			$data['assignments'] = $assignmentsQuery;
 			$data['associatedNotes'] = $associatedNotesQuery;
 			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
-			
+			$data['javascriptPhpCombo'] = $this->load->view('includes/javascriptPhpCombo', '', TRUE);
 			$data['idAccountType'] = $this->session->userdata('idAccountType');
 		}
 		
@@ -71,7 +71,6 @@ class Site extends CI_Controller
 		$this->is_logged_in();
 		$data = array();
 		
-		
 		//ophalen van alle notities info
 		if($notesQuery = $this->site_model->get_notes())
 		{
@@ -80,6 +79,7 @@ class Site extends CI_Controller
 			
 			$data['notes'] = $notesQuery;
 			$data['assignments'] = $assignmentsQuery;
+			
 		}
 		
 		$this->load->view('crud_notities', $data);
@@ -181,10 +181,9 @@ function get_associated_notes()
 		{
 			$data['associatedNotes'] = $associatedNotesQuery;
 			$data['assignmentName'] = $assignmentNameQuery;
-			
 			$data['idAccountType'] = $this->session->userdata('idAccountType');
 		}
-	
+		$data['javascriptPhpCombo'] = $this->load->view('includes/javascriptPhpCombo', '', TRUE);
 		$this->load->view('single_assignment', $data);
 	}	
 
@@ -277,6 +276,8 @@ function read_assignment()
 		
 		$this->site_model->add_note($data);
 		
+		redirect("site/get_associated_notes/" . $this->uri->segment(3));
+		
 	}
 	
 	function update_note()
@@ -290,7 +291,7 @@ function read_assignment()
 		);
 			$this->site_model->update_note($data);
 		}
-		$this->read_note();
+		redirect("site/get_associated_notes/" . $this->uri->segment(3));
                                   
 	}
 	
@@ -300,10 +301,8 @@ function read_assignment()
 		$this->is_logged_in();
 		
 		$this->site_model->delete_note();
-		$this->read_note();
 		
-		//redirect je terug naar de homepage
-		redirect('site/home');
+		redirect("site/get_associated_notes/"  . $this->uri->segment(3));
 	}	
 
 	function logout()

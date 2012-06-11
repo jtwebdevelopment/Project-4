@@ -92,13 +92,13 @@ class Site_model extends CI_Model {
 	
 	function update_note($data) 
 	{
-		$this->db->where('idNotitie', $this->uri->segment(3));
+		$this->db->where('idNotitie', $this->uri->segment(4));
 		$this->db->update('notitie', $data);
 	}
 	
 	function delete_note()
 	{
-		$this->db->where('idNotitie', $this->uri->segment(3));
+		$this->db->where('idNotitie', $this->uri->segment(4));
 		$this->db->delete('notitie');
 	}
 	

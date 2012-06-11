@@ -1,5 +1,5 @@
 $("document").ready( function(){ 
-	$(".lightbox_trigger_image").live('click', function(e){
+	$(".lightbox_trigger_image").live('dblclick', function(e){
         //prevent default action (hyperlink)
         e.preventDefault();
  
@@ -40,7 +40,7 @@ $("document").ready( function(){
  
     });
  
-	$(".lightbox_trigger_text").live('click', function(e){
+	$(".lightbox_trigger_text").live('dblclick', function(e){
         //prevent default action (hyperlink)
         e.preventDefault();
  
