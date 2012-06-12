@@ -164,7 +164,7 @@ label  {
 	}
 	
 .prikbord{
-	width:936px;
+	width:926px;
 	height:522px;
 	margin-right: -10px;
 	background-image:url(../img/prikbord.png);
@@ -184,16 +184,17 @@ body {
 	padding: 5px;
 	width:121px;
 	height:150px;
-	display: inline-block;
+	display: block;
 	background-image:url(../img/notitie.png);
 	background-repeat: no-repeat;
 	background-size: contain;
 	margin-left: 25px;
 	margin-top: 25px;
 	margin-right: 28px;
-	z-index:-1;
-	opacity: 0.9;
+	z-index:10000;
+	opacity: 1;
 }
+
 
 .notitie>p{
 	margin-top:10px;
@@ -230,7 +231,14 @@ h1 {
 .invisible{
 	display:none;
 	}
-
+	
+#visible{
+	display:block;
+	}
+	
+#invisible{
+	display:none;
+	}
 
 input[type=text], input[type=password] {
 	display: inline;
@@ -317,17 +325,63 @@ p.login_customFont {
 }
 
 .noteTitle {
-	margin-top : 20px;
+	margin-top: 25px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .noteTitle a{
+	
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
 }
 
+.notitie > a{
+	text-decoration: none;
+	color: black;
+}
+
 .noteWrapper{
 	position: absolute;
 }
+
+#contextMenu{
+	margin-left: 35%;
+	width: 40px;
+	height: 30px;
+}
+
+.contextMenu > a{
+	text-decoration: none;
+	margin-left: 50px;
+	margin-top: 0px;
+	background-color: grey;
+	border: 1px solid white;
+	color: white;
+}
+
+#homepage_outter { 
+	position:relative; 
+	width:100%; 
+	height:100%;
+}
+
+#homepage_inner { 
+	position:absolute; 
+	top:0; 
+	left:0; 
+	z-index:10; 
+	width:100%; 
+	height:100%;
+}
+#homepage_underlay { 
+	position:absolute; 
+	top:0; 
+	left:0; 
+	z-index:9; 
+	width:800px; 
+	height:500px; 
+	display:none;
+}
+

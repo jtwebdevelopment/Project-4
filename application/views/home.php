@@ -14,6 +14,9 @@
 		<script type="text/javascript" src='<?php echo base_url(); ?>/javascript/lightbox.js'></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>/javascript/jquery.lightbox-0.5.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/css/jquery.lightbox-0.5.css" media="screen" />
+		<script src="<?php echo base_url(); ?>/javascript/jquery.contextMenu.js" type="text/javascript"></script>
+		<link href="<?php echo base_url(); ?>/css/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+		
 		<?php echo $javascriptPhpCombo; ?>
 </head>
 
@@ -121,46 +124,58 @@
     
     <div id="prikbordcontainer" class="split">
     	<div class="prikbord" id="containment-wrapper">   
+
 		   <?php
 				//als er opdrachten zijn
-				if(isset($assignments))
+				if(isset($assignments)) 
 				{
 					?>
 					<ul id="sortable">
-					<?php
+					
+					<?php 
+					
 					foreach($assignments as $assignment)
 					{
+					
+					?>
+						<table>
+						<?php
+						
 						?>
-							<div class="notitie">
+						
+						<div class="notitie" id="notitie">
+						
 								<li id="draggable" class="noteTitle">
 									<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>
-									
+								</li>
 									<?php
 										//als je bij de admins of docenten hoort krijg je de volgende links te zien
 										if($idAccountType == 1 || $idAccountType == 3)
 										{
-											//kan je updaten
-											echo anchor("site/update_assignment/$assignment->idOpdracht/update", 'update');
-											
-											echo '<br />';
-											
-											//kan je verwijderen
-											echo anchor("site/delete_assignment/$assignment->idOpdracht", 'delete');
 											?>
+											<ul id="myMenu" class="contextMenu">
+												<li class="edit">
+											<?php
+											//kan je updaten
+											echo anchor("site/update_assignment/$assignment->idOpdracht/update", 'aanpassen' );
+											?> </li>
+											
+											<li class="delete"> <?php
+											//kan je verwijderen
+											echo anchor("site/delete_assignment/$assignment->idOpdracht", 'verwijderen' );
+											
+											?> </li> </ul>
+											
+											
 											<!-- <a href="<?php echo base_url(); ?>img/password_label.jpg">
 												<img src="<?php echo base_url(); ?>img/password_label.jpg"  width="72" height="72" alt="" />
-											</a> --!>
+											</a> -->
 											<?php
 										}
 									?>
-								</li>
-							</div>
-					<?php
-					}
-					?></ul><?php
-				}
-			?>
-        </div>	<!-- end prikbord -->
+								</div>
+					<?php } ?>
+        </div> </ul> <?php } ?>	</div>	<!-- end prikbord -->
     </div> <!-- end prikbord container -->
  </div>  <!-- end wrapper --> 
 </body>
