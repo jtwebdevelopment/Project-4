@@ -143,7 +143,7 @@
 						
 						?>
 						
-						<div class="notitie" id="notitie">
+						<div class="notitie" id="notitie" name="<?php echo $assignment->idOpdracht; ?>">
 						
 								<li id="draggable" class="noteTitle">
 									<h3><?php echo anchor("site/get_associated_notes/$assignment->idOpdracht", $assignment->titel);?></h3>

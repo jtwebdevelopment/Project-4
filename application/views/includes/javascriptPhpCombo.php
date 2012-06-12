@@ -16,7 +16,6 @@
 		
 		$( "ul, li" ).disableSelection();
 		
-		
 		$(".notitie").each(function () {
 			$(this).mousedown( function(event) {
 				switch (event.which) {
@@ -71,15 +70,20 @@
 				
 			}
 		});
-		
-		$(".notitie").contextMenu({
-        menu: "myMenu"
-		
-		},
-        function(action, el, pos) {
-			window.location.href = "h" + action;
+	
+		$(".notitie").each(function () {
+			$(this).contextMenu({
+				menu: "myMenu"
+			},
+			function(action, el, pos) {
+				// verander hier de url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				
+				var n = "h" + action.slice(0,58); 
+				window.location.href = n + $(el).attr("name") + "/update";
+					
+			}
+			);
 		});
-		
 	});
 	
 	

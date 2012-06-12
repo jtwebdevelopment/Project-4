@@ -31,14 +31,19 @@ if(jQuery)( function() {
 				$('#' + o.menu).addClass('contextMenu');
 				// Simulate a true right click
 				$(this).mousedown( function(e) {
-					
 					var evt = e;
 					if (e.button == 2) //Added to make this compatible with draggable
+					{
 						evt.stopPropagation();
+						$( "#draggable" ).draggable( "option", "disabled", true );
+						$( "#sortable" ).sortable( "option", "disabled", true );
+					}
 					$(this).mouseup( function(e) {
-						if (e.button == 2) //Added to make this compatible with draggable
+						if (e.button == 2) { //Added to make this compatible with draggable
 							e.stopPropagation();
-						
+							$( "#draggable" ).draggable( "option", "disabled", true );
+							$( "#sortable" ).sortable( "option", "disabled", true );
+						}
 						var srcElement = $(this);
 						$(this).unbind('mouseup');
 						if( evt.button == 2 ) {
@@ -126,6 +131,8 @@ if(jQuery)( function() {
 								$(document).click( function() {
 									$(document).unbind('click').unbind('keypress');
 									$(menu).fadeOut(o.outSpeed);
+									$( "#draggable" ).draggable( "option", "disabled", false );
+									$( "#sortable" ).sortable( "option", "disabled", false );
 									return false;
 								});
 							}, 0);
@@ -204,6 +211,7 @@ if(jQuery)( function() {
 		
 		// Destroy context menu(s)
 		destroyContextMenu: function() {
+			
 			// Destroy specified context menus
 			$(this).each( function() {
 				// Disable action
